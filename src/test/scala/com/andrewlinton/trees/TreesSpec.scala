@@ -5,24 +5,47 @@ import org.scalatest.flatspec.AnyFlatSpec
 class TreesSpec extends AnyFlatSpec {
 
   "Tree" should "be created" in {
-    /*
-    BinaryNode: root = New BinaryNode("4")
-BinaryNode: node1 = New BinaryNode("1")
-BinaryNode: node2 = New BinaryNode("2")
-BinaryNode: node3 = New BinaryNode("3")
-BinaryNode: node5 = New BinaryNode("5")
-BinaryNode: node6 = New BinaryNode("6")
-BinaryNode: node7 = New BinaryNode("7")
-BinaryNode: node8 = New BinaryNode("8")
-root.LeftChild = node2
-root.RightChild = node5
-node2.LeftChild = node1
-node2.RightChild = node3
-node5.RightChild = node7
-node7.LeftChild = node6
-node7.RightChild = node8
-     */
 
+    val processNode = (node: BinaryNode) => {
+      println(node.getName())
+    }
+
+    val root = createTree()
+
+    root.preorderTraversal(processNode)
+    println()
+/*    root.inorderTraversal(f)
+    println()
+    root.postorderTraversal(f)
+    println()
+    root.traverseDepthFirst(f) */
+  }
+
+  val processNode = (node: BinaryNode) => {
+    println(node.getName())
+  }
+
+  "preorder" should "be traversed" in {
+    val root = createTree()
+    root.preorderTraversal(processNode)
+  }
+
+  "inorder" should "be traversed" in {
+    val root = createTree()
+    root.inorderTraversal(processNode)
+  }
+
+  "postorder" should "be traversed" in {
+    val root = createTree()
+    root.postorderTraversal(processNode)
+  }
+
+  "depthFirst" should "be traversed" in {
+    val root = createTree()
+    root.traverseDepthFirst(processNode)
+  }
+
+  def createTree(): BinaryNode = {
     val root = new BinaryNode("4")
     val node1 = new BinaryNode("1")
     val node2 = new BinaryNode("2")
@@ -38,14 +61,7 @@ node7.RightChild = node8
     node5.rightNode = node7
     node7.leftNode = node6
     node7.rightNode = node8
-
-    root.preorderTraversal()
-    println()
-    root.inorderTraversal()
-    println()
-    root.postorderTraversal()
-    println()
-    root.traverseDepthFirst()
+    root
   }
 
 }

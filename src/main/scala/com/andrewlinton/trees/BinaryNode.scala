@@ -4,48 +4,52 @@ class BinaryNode(name: String) {
   var leftNode: BinaryNode = null
   var rightNode: BinaryNode = null
 
-  def preorderTraversal(): Unit = {
-    println(name)
+  def preorderTraversal(f: (BinaryNode) => Unit): Unit = {
+    f(this)
     if (leftNode != null) {
-      leftNode.preorderTraversal()
+      leftNode.preorderTraversal(f)
     }
     if (rightNode != null) {
-      rightNode.preorderTraversal()
+      rightNode.preorderTraversal(f)
     }
   }
 
-  def inorderTraversal(): Unit = {
+  def inorderTraversal(f: (BinaryNode) => Unit): Unit = {
     if (leftNode != null) {
-      leftNode.preorderTraversal()
+      leftNode.inorderTraversal(f)
     }
-    println(name)
+    f(this)
     if (rightNode != null) {
-      rightNode.preorderTraversal()
+      rightNode.inorderTraversal(f)
     }
   }
 
-  def postorderTraversal(): Unit = {
+  def postorderTraversal(f: (BinaryNode) => Unit): Unit = {
     if (leftNode != null) {
-      leftNode.preorderTraversal()
+      leftNode.postorderTraversal(f)
     }
     if (rightNode != null) {
-      rightNode.preorderTraversal()
+      rightNode.postorderTraversal(f)
     }
-    println(name)
+    f(this);
   }
 
-  def traverseDepthFirst(): Unit = {
-/*    val children: scala.collection.mutable.Queue[BinaryNode] = new scala.collection.mutable.Queue[BinaryNode]()
+  def traverseDepthFirst(f: (BinaryNode) => Unit): Unit = {
+    val children: scala.collection.mutable.Queue[BinaryNode] = new scala.collection.mutable.Queue[BinaryNode]()
     children.enqueue(this)
-    while (!children.front==null) {
+    while (children.length > 0) {
       val node = children.dequeue()
-      println(node.name)
-      if (leftNode != null) {
-        children.enqueue(leftNode)
+      f(node)
+      if (node.leftNode != null) {
+        children.enqueue(node.leftNode)
       }
-      if (rightNode != null) {
-        children.enqueue(rightNode)
+      if (node.rightNode != null) {
+        children.enqueue(node.rightNode)
       }
-    } */
+    }
+  }
+
+  def getName(): String = {
+  return this.name
   }
 }
